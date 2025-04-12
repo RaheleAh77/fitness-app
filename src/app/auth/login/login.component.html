@@ -1,0 +1,43 @@
+<section>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="ایمیل"
+        name="email"
+        required
+        email
+        #email="ngModel"
+        ngModel
+      />
+      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')"
+        >لطفا یک ایمیل معتبر وارد کنید.</mat-error
+      >
+      <mat-error *ngIf="email.hasError('required')"
+        >ایمیل الزامی است نباید خالی باشد.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field hintLabel="رمز عبور حداقل باید شش کاراکتر داشته باشد.">
+      <input
+        type="password"
+        #password="ngModel"
+        matInput
+        placeholder="رمز عبور"
+        name="password"
+        required
+        minlength="6"
+        ngModel
+      />
+      <!-- <mat-hint align="start"
+          ><strong>Should be at least 6 characters long.</strong>
+        </mat-hint> -->
+      <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
+      <mat-error>رمز عبور حداقل باید شش کاراکتر داشته باشد.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="loginForm.invalid">
+      ورود
+    </button>
+  </form>
+</section>

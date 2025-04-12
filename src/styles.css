@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --font-family: "Vazirmatn", sans-serif !important;
+}
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-typography {
+  font-family: var(--font-family);
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+.mat-mdc-input-element::placeholder {
+  font-family: var(--font-family);
+}
