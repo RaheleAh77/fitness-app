@@ -26,3 +26,10 @@ body {
 .mat-typography h1 {
   font-family: var(--font-family);
 }
+
+[class^="mat-"]:not([class*="mat-icon"]),
+[class^="mdc-"],
+[class*=" mat-"]:not([class*="mat-icon"]),
+[class*=" mdc-"] {
+  font-family: var(--font-family) !important;
+}
