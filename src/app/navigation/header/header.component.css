@@ -1,0 +1,21 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+.sidenav-toggle {
+  display: block;
+}
+
+@media only screen and (min-width: 576px) {
+  .desktop-nav {
+    display: block;
+  }
+
+  .sidenav-toggle {
+    display: none;
+  }
+}

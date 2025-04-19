@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <div class="sidenav-toggle">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="onToggleSidenav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <span class="example-spacer"></span>
+  <nav class="desktop-nav">
+    <a mat-icon-button [routerLink]="['/home']"><mat-icon>home</mat-icon></a>
+    <a mat-icon-button [routerLink]="['/signup']"
+      ><mat-icon>person_add</mat-icon></a
+    >
+    <a mat-icon-button [routerLink]="['/login']"><mat-icon>login</mat-icon></a>
+    <a mat-icon-button [routerLink]="['/training']"
+      ><mat-icon>fitness_center</mat-icon></a
+    >
+  </nav>
+</mat-toolbar>

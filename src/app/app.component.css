@@ -1,8 +1,6 @@
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-mat-sidenav-container, mat-sidenav , mat-sidenav-content {
+mat-sidenav-container,
+mat-sidenav,
+mat-sidenav-content {
   height: 100%;
 }
 
@@ -10,25 +8,6 @@ mat-sidenav {
   width: 35%;
 }
 
-.desktop-nav {
-  display: none;
-}
-
 main {
   margin-top: 2rem;
 }
-
-.sidenav-toggle {
-  display: block;
-}
-
-@media only screen and (min-width: 576px) {
-  .desktop-nav {
-    display: block;
-  }
-
-  .sidenav-toggle {
-    display: none;
-  }
-}
-
