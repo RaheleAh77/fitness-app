@@ -14,14 +14,15 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mat-typography {
-  font-family: var(--font-family);
-}
-
 * {
   font-family: var(--font-family);
 }
 
 .mat-mdc-input-element::placeholder {
+  font-family: var(--font-family);
+}
+
+
+.mat-typography h1 {
   font-family: var(--font-family);
 }
