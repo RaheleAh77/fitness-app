@@ -8,20 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.CurrentTrainingComponent = void 0;
 var core_1 = require("@angular/core");
+var stop_training_modal_component_1 = require("./stop-training-modal/stop-training-modal.component");
 var CurrentTrainingComponent = /** @class */ (function () {
-    function CurrentTrainingComponent() {
+    function CurrentTrainingComponent(dialog) {
+        this.dialog = dialog;
         this.color = 'primary';
         this.mode = 'determinate';
         this.value = 0;
     }
     CurrentTrainingComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var intervalId = setInterval(function () {
+        this.timer = setInterval(function () {
             _this.value += 5;
             if (_this.value >= 100) {
-                clearInterval(intervalId);
+                clearInterval(_this.timer);
             }
         }, 1000);
+    };
+    CurrentTrainingComponent.prototype.onStop = function () {
+        clearInterval(this.timer);
+        this.dialog.open(stop_training_modal_component_1.StopTrainingModalComponent);
     };
     CurrentTrainingComponent = __decorate([
         core_1.Component({

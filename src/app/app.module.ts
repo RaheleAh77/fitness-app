@@ -17,6 +17,7 @@ import { DateAdapter,MAT_DATE_FORMATS,MAT_DATE_LOCALE } from '@angular/material/
 import {MaterialPersianDateAdapter,PERSIAN_DATE_FORMATS} from './persian-dateadapter';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { StopTrainingModalComponent } from './current-training/stop-training-modal/stop-training-modal.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     PastTrainingComponent,
     HomeComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    StopTrainingModalComponent
   ],
   imports: [
     BrowserModule,
