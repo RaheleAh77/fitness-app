@@ -1,4 +1,7 @@
 <h1 mat-dialog-title>آیا از توقف تمرین اطمینان دارید؟</h1>
+<mat-dialog-content>
+    <p>شما تا این لحظه {{data.value}}% از تمرینتان را انجام داده‌اید</p>
+</mat-dialog-content>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="true">بله</button>
   <button mat-button [mat-dialog-close]="false" cdkFocusInitial>خیر</button>

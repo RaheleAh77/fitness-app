@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -14,10 +14,15 @@ export class CurrentTrainingComponent implements OnInit {
   mode: ProgressSpinnerMode = 'determinate';
   value = 0;
   timer!: any;
+  @Output() dialogEvent = new EventEmitter();
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.startOrResumeTraining();
+  }
+
+  startOrResumeTraining() {
     this.timer = setInterval(() => {
       this.value += 5;
       if (this.value >= 100) {
@@ -28,6 +33,16 @@ export class CurrentTrainingComponent implements OnInit {
 
   onStop() {
     clearInterval(this.timer);
-    this.dialog.open(StopTrainingModalComponent);
+    const dialogRef = this.dialog.open(StopTrainingModalComponent, {
+      data: { value: this.value },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dialogEvent.emit();
+      } else {
+        this.startOrResumeTraining();
+      }
+    });
   }
 }
