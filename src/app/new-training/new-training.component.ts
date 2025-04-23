@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-training',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NewTrainingComponent {
   @Output() trainingStart = new EventEmitter<void>();
+  sportControl = new FormControl(null, Validators.required);
   onStartTraining() {
     this.trainingStart.emit();
   }

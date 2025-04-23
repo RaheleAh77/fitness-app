@@ -17,6 +17,6 @@ export class SignupComponent {
       email: form.value.email,
       password: form.value.password,
     });
-    form.reset();
+    // form.reset();
   }
 }

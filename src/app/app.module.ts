@@ -26,6 +26,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingModalComponent } from './current-training/stop-training-modal/stop-training-modal.component';
 import { AuthService } from './auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AuthService } from './auth/auth.service';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

@@ -6,7 +6,7 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>ورزش موردنظر</mat-label>
-        <mat-select>
+        <mat-select [formControl]="sportControl" required>
           <mat-option  value="شنا">
             شنا
           </mat-option>
@@ -20,6 +20,7 @@
             اسکوات
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="sportControl.hasError('required')">This field is required</mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
