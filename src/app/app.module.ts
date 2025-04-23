@@ -13,12 +13,19 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
 import { PastTrainingComponent } from './past-training/past-training.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { DateAdapter,MAT_DATE_FORMATS,MAT_DATE_LOCALE } from '@angular/material/core';
-import {MaterialPersianDateAdapter,PERSIAN_DATE_FORMATS} from './persian-dateadapter';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import {
+  MaterialPersianDateAdapter,
+  PERSIAN_DATE_FORMATS,
+} from './persian-dateadapter';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingModalComponent } from './current-training/stop-training-modal/stop-training-modal.component';
-
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -32,20 +39,27 @@ import { StopTrainingModalComponent } from './current-training/stop-training-mod
     HomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    StopTrainingModalComponent
+    StopTrainingModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [{
-    provide:DateAdapter,useClass:MaterialPersianDateAdapter,deps:[MAT_DATE_LOCALE]
-  },{
-    provide:MAT_DATE_FORMATS,useValue:PERSIAN_DATE_FORMATS
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MaterialPersianDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: PERSIAN_DATE_FORMATS,
+    },
+    AuthService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

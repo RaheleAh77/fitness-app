@@ -12,13 +12,18 @@
 
   <span class="example-spacer"></span>
   <nav class="desktop-nav">
-    <a mat-icon-button [routerLink]="['/home']"><mat-icon>home</mat-icon></a>
-    <a mat-icon-button [routerLink]="['/signup']"
+    <a mat-icon-button *ngIf="!isAuth" [routerLink]="['/home']"
+      ><mat-icon>home</mat-icon></a
+    >
+    <a mat-icon-button *ngIf="!isAuth" [routerLink]="['/signup']"
       ><mat-icon>person_add</mat-icon></a
     >
-    <a mat-icon-button [routerLink]="['/login']"><mat-icon>login</mat-icon></a>
-    <a mat-icon-button [routerLink]="['/training']"
+    <a mat-icon-button *ngIf="!isAuth" [routerLink]="['/login']"
+      ><mat-icon>login</mat-icon></a
+    >
+    <a mat-icon-button *ngIf="isAuth" [routerLink]="['/training']"
       ><mat-icon>fitness_center</mat-icon></a
     >
+    <a mat-icon-button *ngIf="isAuth"><mat-icon>logout</mat-icon></a>
   </nav>
 </mat-toolbar>
