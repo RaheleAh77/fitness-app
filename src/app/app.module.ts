@@ -27,6 +27,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { StopTrainingModalComponent } from './current-training/stop-training-modal/stop-training-modal.component';
 import { AuthService } from './auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TrainingService } from './training/training.service';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       useValue: PERSIAN_DATE_FORMATS,
     },
     AuthService,
+    TrainingService
   ],
   bootstrap: [AppComponent],
 })
