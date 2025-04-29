@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { TrainingService } from '../training/training.service';
 import { Exercise } from '../training/exercise.model';
 
@@ -8,9 +8,7 @@ import { Exercise } from '../training/exercise.model';
   templateUrl: './new-training.component.html',
   styleUrls: ['./new-training.component.css']
 })
-export class NewTrainingComponent {
-  @Output() trainingStart = new EventEmitter<void>();
-  sportControl = new FormControl(null, Validators.required);
+export class NewTrainingComponent implements OnInit {
 
   exercises!: Exercise[];
   constructor(private trainingService: TrainingService) {}
@@ -18,7 +16,7 @@ export class NewTrainingComponent {
   ngOnInit(): void {
     this.exercises = this.trainingService.getAvailableExercises();
   }
-  onStartTraining() {
-    this.trainingStart.emit();
+  onStartTraining(form:NgForm) {
+    this.trainingService.startExercise(form.value.exercise);
   }
 }
