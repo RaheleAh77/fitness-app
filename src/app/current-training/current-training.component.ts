@@ -3,6 +3,7 @@ import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { StopTrainingModalComponent } from './stop-training-modal/stop-training-modal.component';
+import { TrainingService } from '../training/training.service';
 
 @Component({
   selector: 'app-current-training',
@@ -16,19 +17,20 @@ export class CurrentTrainingComponent implements OnInit {
   timer!: any;
   @Output() dialogEvent = new EventEmitter();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private trainingService: TrainingService) {}
 
   ngOnInit(): void {
     this.startOrResumeTraining();
   }
 
   startOrResumeTraining() {
+    const increment = this.trainingService.getRunningExercise().duration / 100 * 1000;
     this.timer = setInterval(() => {
-      this.value += 5;
+      this.value += 1;
       if (this.value >= 100) {
         clearInterval(this.timer);
       }
-    }, 1000);
+    }, increment);
   }
 
   onStop() {
