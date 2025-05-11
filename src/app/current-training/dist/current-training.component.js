@@ -16,17 +16,17 @@ var CurrentTrainingComponent = /** @class */ (function () {
         this.color = 'primary';
         this.mode = 'determinate';
         this.value = 0;
-        this.dialogEvent = new core_1.EventEmitter();
     }
     CurrentTrainingComponent.prototype.ngOnInit = function () {
         this.startOrResumeTraining();
     };
     CurrentTrainingComponent.prototype.startOrResumeTraining = function () {
         var _this = this;
-        var increment = this.trainingService.getRunningExercise().duration / 100 * 1000;
+        var increment = (this.trainingService.getRunningExercise().duration / 100) * 1000;
         this.timer = setInterval(function () {
             _this.value += 1;
             if (_this.value >= 100) {
+                _this.trainingService.completeExercise();
                 clearInterval(_this.timer);
             }
         }, increment);
@@ -39,16 +39,13 @@ var CurrentTrainingComponent = /** @class */ (function () {
         });
         dialogRef.afterClosed().subscribe(function (result) {
             if (result) {
-                _this.dialogEvent.emit();
+                _this.trainingService.cancelExercise(_this.value);
             }
             else {
                 _this.startOrResumeTraining();
             }
         });
     };
-    __decorate([
-        core_1.Output()
-    ], CurrentTrainingComponent.prototype, "dialogEvent");
     CurrentTrainingComponent = __decorate([
         core_1.Component({
             selector: 'app-current-training',

@@ -15,7 +15,6 @@ export class CurrentTrainingComponent implements OnInit {
   mode: ProgressSpinnerMode = 'determinate';
   value = 0;
   timer!: any;
-  @Output() dialogEvent = new EventEmitter();
 
   constructor(public dialog: MatDialog, private trainingService: TrainingService) {}
 
@@ -24,10 +23,11 @@ export class CurrentTrainingComponent implements OnInit {
   }
 
   startOrResumeTraining() {
-    const increment = this.trainingService.getRunningExercise().duration / 100 * 1000;
+    const increment = (this.trainingService.getRunningExercise().duration! / 100) * 1000;
     this.timer = setInterval(() => {
       this.value += 1;
       if (this.value >= 100) {
+        this.trainingService.completeExercise();
         clearInterval(this.timer);
       }
     }, increment);
@@ -41,7 +41,7 @@ export class CurrentTrainingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.dialogEvent.emit();
+        this.trainingService.cancelExercise(this.value);
       } else {
         this.startOrResumeTraining();
       }
