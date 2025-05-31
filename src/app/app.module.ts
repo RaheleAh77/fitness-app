@@ -28,6 +28,10 @@ import { StopTrainingModalComponent } from './current-training/stop-training-mod
 import { AuthService } from './auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TrainingService } from './training/training.service';
+import { TranslationPipe } from './translation.pipe';
+import { PersianDatePipe } from './persian-date.pipe';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import {PersianPaginatorIntl}from './pagination.translate';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { TrainingService } from './training/training.service';
     HeaderComponent,
     SidenavListComponent,
     StopTrainingModalComponent,
+    TranslationPipe,
+    PersianDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,7 @@ import { TrainingService } from './training/training.service';
       provide: MAT_DATE_FORMATS,
       useValue: PERSIAN_DATE_FORMATS,
     },
+    {provide:MatPaginatorIntl,useClass:PersianPaginatorIntl},
     AuthService,
     TrainingService
   ],

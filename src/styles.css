@@ -33,3 +33,7 @@ body {
 [class*=" mdc-"] {
   font-family: var(--font-family) !important;
 }
+
+mat-paginator .mat-mdc-paginator-container {
+  justify-content: flex-start!important;
+}
