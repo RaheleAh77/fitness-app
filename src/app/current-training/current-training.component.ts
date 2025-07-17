@@ -23,11 +23,11 @@ export class CurrentTrainingComponent implements OnInit {
   }
 
   startOrResumeTraining() {
-    const increment = (this.trainingService.getRunningExercise().duration! / 100) * 1000;
+    const increment = (this.trainingService.getRunnigExercise().duration! / 100) * 1000;
     this.timer = setInterval(() => {
       this.value += 1;
       if (this.value >= 100) {
-        this.trainingService.completeExercise();
+        this.trainingService.completeExecise();
         clearInterval(this.timer);
       }
     }, increment);

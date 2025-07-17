@@ -1,17 +1,17 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TrainingService } from '../training/training.service';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
 import { Exercise } from '../training/exercise.model';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-past-training',
   templateUrl: './past-training.component.html',
   styleUrls: ['./past-training.component.css'],
 })
-export class PastTrainingComponent implements AfterViewInit, OnInit {
+export class PastTrainingComponent implements OnInit, AfterViewInit,OnDestroy {
   displayedColumns: string[] = [
     'name',
     'duration',
@@ -19,20 +19,24 @@ export class PastTrainingComponent implements AfterViewInit, OnInit {
     'date',
     'state',
   ];
-
-  constructor(
-    private trainingService: TrainingService,
-    private _liveAnnouncer: LiveAnnouncer
-  ) {}
-
-  dataSource = new MatTableDataSource<Exercise>;
-
-  @ViewChild(MatSort) sort!: MatSort;
-
+  dataSource = new MatTableDataSource<Exercise>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  private finishedExSubs!: Subscription;
+
+  constructor(private trainingService: TrainingService) {}
 
   ngOnInit(): void {
-      this.dataSource.data = this.trainingService.getCompleteOrCancelExercises();
+   this.finishedExSubs= this.trainingService.finishedExChanged.subscribe(
+      (exercises: Exercise[]) => {
+        this.dataSource.data = exercises;
+      }
+    );
+    this.trainingService.fetchCompleteOrCancelExercises();
+  }
+
+  ngOnDestroy(): void {
+    this.finishedExSubs.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -40,16 +44,11 @@ export class PastTrainingComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

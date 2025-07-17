@@ -32,6 +32,8 @@ import { TranslationPipe } from './translation.pipe';
 import { PersianDatePipe } from './persian-date.pipe';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import {PersianPaginatorIntl}from './pagination.translate';
+import {AngularFireModule} from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';import 'firebase/compat/firestore';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import {PersianPaginatorIntl}from './pagination.translate';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
     {
