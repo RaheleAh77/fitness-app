@@ -13,21 +13,17 @@
       />
       <mat-error
         *ngIf="
-          (singUpForm.controls['email'].dirty ||
-            singUpForm.controls['email'].touched) &&
+          (email.dirty || email.touched) &&
           email.hasError('email') &&
           !email.hasError('required')
         "
-        >لطفا یک ایمیل معتبر وارد کنید.</mat-error
       >
-      <mat-error
-        *ngIf="
-          (singUpForm.controls['email'].dirty ||
-            singUpForm.controls['email'].touched) &&
-          email.hasError('required')
-        "
-        >ایمیل الزامی است نباید خالی باشد.</mat-error
-      >
+        لطفا یک ایمیل معتبر وارد کنید.
+      </mat-error>
+
+      <mat-error *ngIf="email.hasError('required')">
+        ایمیل الزامی است نباید خالی باشد.
+      </mat-error>
     </mat-form-field>
     <mat-form-field hintLabel="رمز عبور حداقل باید شش کاراکتر داشته باشد.">
       <input
@@ -41,13 +37,9 @@
         ngModel
       />
       <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
-      <mat-error
-        *ngIf="
-          singUpForm.controls['password'].dirty ||
-          singUpForm.controls['password'].touched
-        "
-        >رمز عبور حداقل باید شش کاراکتر داشته باشد.</mat-error
-      >
+      <mat-error *ngIf="password.dirty || password.touched">
+        رمز عبور حداقل باید شش کاراکتر داشته باشد.
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>یک تاریخ انتخاب کن.</mat-label>

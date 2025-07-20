@@ -34,6 +34,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import {PersianPaginatorIntl}from './pagination.translate';
 import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';import 'firebase/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { environment } from 'src/environments/environment';import 'firebase/comp
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
