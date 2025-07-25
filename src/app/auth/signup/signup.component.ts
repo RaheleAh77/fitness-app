@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { UIService } from 'src/app/shared/ui.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -9,14 +16,26 @@ import { AuthService } from '../auth.service';
   // providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignupComponent {
-  constructor(private authService: AuthService) {}
+export class SignupComponent implements OnInit, OnDestroy {
+  isLoading = false;
+  loadingStateSubs!: Subscription;
+  constructor(private authService: AuthService, private uiService: UIService) {}
 
   onSubmit(form: NgForm) {
     this.authService.registerUser({
       email: form.value.email,
       password: form.value.password,
     });
-    // form.reset();
+  }
+
+  ngOnInit() {
+    this.loadingStateSubs = this.uiService.loadingState.subscribe(
+      (isLoading) => {
+        this.isLoading = isLoading;
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.loadingStateSubs.unsubscribe();
   }
 }

@@ -35,6 +35,7 @@ import {PersianPaginatorIntl}from './pagination.translate';
 import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';import 'firebase/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { UIService } from './shared/ui.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     },
     {provide:MatPaginatorIntl,useClass:PersianPaginatorIntl},
     AuthService,
-    TrainingService
+    TrainingService,
+    UIService
   ],
   bootstrap: [AppComponent],
 })
